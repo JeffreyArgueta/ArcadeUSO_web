@@ -5,8 +5,17 @@ import Button from "@/components/buttons/Button";
 import Notification from "@/components/notifications/Notification";
 import "./registerForm.css";
 
-const RegisterForm = ({ isRegistered, setIsRegistered }) => {
-  const { formData, errors, loading, showNotification, handleChange, handleSubmit } = useRegisterForm(setIsRegistered);
+const RegisterForm = ({ isRegistered, setIsRegistered, googleData = null }) => {
+  const {
+    formData,
+    errors,
+    loading,
+    showNotification,
+    handleChange,
+    handleSubmit,
+  } = useRegisterForm(setIsRegistered, googleData);
+
+  const isGoogle = !!googleData;
 
   return (
     <>
@@ -24,38 +33,47 @@ const RegisterForm = ({ isRegistered, setIsRegistered }) => {
         />
         {errors.username && <span className="error-message">{errors.username}</span>}
 
-        <InputField
-          label="Correo"
-          type="email"
-          name="email"
-          autocomplete="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        {errors.email && <span className="error-message">{errors.email}</span>}
+        {!isGoogle && (
+          <>
+            <InputField
+              label="Correo"
+              type="email"
+              name="email"
+              autocomplete="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+            {errors.email && <span className="error-message">{errors.email}</span>}
 
-        <InputPassword
-          label="Contraseña"
-          name="password"
-          autocomplete="password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-        {errors.password && <span className="error-message">{errors.password}</span>}
+            <InputPassword
+              label="Contraseña"
+              name="password"
+              autocomplete="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+            {errors.password && <span className="error-message">{errors.password}</span>}
 
-        <InputPassword
-          label="Confirmar contraseña"
-          name="confirm_password"
-          autocomplete="new-password"
-          value={formData.confirm_password}
-          onChange={handleChange}
-          required
-        />
-        {errors.confirm_password && <span className="error-message">{errors.confirm_password}</span>}
+            <InputPassword
+              label="Confirmar contraseña"
+              name="confirm_password"
+              autocomplete="new-password"
+              value={formData.confirm_password}
+              onChange={handleChange}
+              required
+            />
+            {errors.confirm_password && <span className="error-message">{errors.confirm_password}</span>}
+          </>
+        )}
 
-        <Button text={loading ? "Registrando..." : "Registrarse"} type="submit" onClick={handleSubmit} disabled={isRegistered} />
+        <Button
+          text={loading ? "Registrando..." : "Registrarse"}
+          type="submit"
+          onClick={handleSubmit}
+          disabled={isRegistered}
+        />
       </form>
     </>
   );

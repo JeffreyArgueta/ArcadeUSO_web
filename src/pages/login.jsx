@@ -11,19 +11,37 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Redirigir al usuario al flujo de autenticación de Google
-  const handleGoogleLogin = () => {
-    window.location.href = `${import.meta.env.VITE_API_URL}/auth/login/google`;
+  // Paso 1: Obtener la URL de Google y redirigir
+  const handleGoogleLogin = async () => {
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/google/auth-url`);
+      const { url } = await res.json();
+      window.location.href = url;
+    } catch (error) {
+      console.error("❌ Error obteniendo URL de Google:", error);
+    }
   };
 
-  // Procesar el callback de Google al regresar al sitio
+  // Paso 2: Procesar el código de Google al regresar
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get("token");
+    const code = urlParams.get("code");
 
-    if (token) {
-      localStorage.setItem("token", token);
-      navigate("/dashboard");
+    if (code) {
+      loginWithGoogle(code)
+        .then((data) => {
+          if (data.token) {
+            localStorage.setItem("token", data.token);
+            navigate("/dashboard");
+          } else if (data.email) {
+            navigate(
+              `/register?email=${data.email}&google_id=${data.google_id}&name=${data.name}&refreshToken=${data.refreshToken}`
+            );
+          }
+        })
+        .catch((err) => {
+          console.error("❌ Error en login con Google:", err);
+        });
     }
   }, [navigate]);
 
