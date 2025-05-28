@@ -34,11 +34,13 @@ export const useRegisterForm = (setIsRegistered, googleData = null) => {
     let error = "";
 
     if (!value.trim()) {
-      error = `${name === "username" ? "El nickname" : "El campo"} es obligatorio.`;
+      if (name === "username") { error = "El nickname es obligatorio." }
+      else if (name === "email") { error = "El correo es obligatorio." }
+      else if (name === "password") { error = "La contraseña es obligatoria." }
     } else if (name === "username") {
       const isAvailable = await checkUsernameAvailability(value);
       if (!isAvailable) error = "Este nickname ya está en uso.";
-    } else if (name === "email" && !isGoogle) {
+    } else if (name === "email") {
       const isAvailable = await checkEmailAvailability(value);
       if (!isAvailable) error = "Este correo ya está en uso.";
     }
@@ -50,7 +52,7 @@ export const useRegisterForm = (setIsRegistered, googleData = null) => {
     const { name, value } = event.target;
     setFormData((prevForm) => ({ ...prevForm, [name]: value }));
 
-    if (["username", "email"].includes(name)) {
+    if (["username", "email", "password"].includes(name)) {
       await validateField(name, value);
     }
   };
@@ -61,34 +63,20 @@ export const useRegisterForm = (setIsRegistered, googleData = null) => {
 
     let formValid = true;
 
-    if (!formData.username.trim()) {
-      setErrors((prevErrors) => ({ ...prevErrors, username: "El nickname es obligatorio." }));
-      formValid = false;
-    } else {
-      await validateField("username", formData.username);
-      if (errors.username) formValid = false;
-    }
-
     if (!isGoogle) {
-      const requiredFields = ["email", "password", "confirm_password"];
+      const requiredFields = ["username", "email", "password", "confirm_password"];
 
-      for (const field of requiredFields) {
-        if (!formData[field].trim()) {
-          setErrors((prevErrors) => ({ ...prevErrors, [field]: "Este campo es obligatorio." }));
-          formValid = false;
-        }
-      }
-
-      if (formData.password !== formData.confirm_password) {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          confirm_password: "Las contraseñas deben coincidir.",
-        }));
-        formValid = false;
-      }
-
-      await validateField("email", formData.email);
-      if (errors.email) formValid = false;
+      await Promise.all(
+        requiredFields.map(async (field) => {
+          if (field === "confirm_password" && formData.password.trim() !== formData.confirm_password.trim()) {
+            setErrors((prevErrors) => ({ ...prevErrors, confirm_password: "Las contraseñas deben coincidir." }));
+            formValid = false;
+          } else {
+            await validateField(field, formData[field]);
+            if (errors[field]) formValid = false;
+          }
+        })
+      );
     }
 
     if (!formValid) {

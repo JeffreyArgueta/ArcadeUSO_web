@@ -26,6 +26,7 @@ function App() {
   return (
     <Routes>
       {/* Rutas públicas */}
+      <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
@@ -34,8 +35,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
 
       </Route>
-       {/* Esta captura cualquier ruta no existente */}
-  <Route path="*" element={<NotFound />} />
+      {/* Esta captura cualquier ruta no existente */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
