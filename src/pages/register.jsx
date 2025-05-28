@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { jwtDecode } from "jwt-decode";
 import Modal from '@/components/modals/modal';
 import RegisterForm from '../components/forms/registerForm';
 import Link from '@/components/links/link';
@@ -21,6 +22,30 @@ const Register = () => {
     name: searchParams.get("name") || null,
     refreshToken: searchParams.get("refreshToken") || null,
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+
+        // Solo redirigir si el usuario está en una página de autenticación
+        if (decodedToken?.exp * 1000 > Date.now()) {
+          navigate("/dashboard");
+        } else {
+          localStorage.removeItem("token"); // ✅ Borra el token solo si expiró
+        }
+      } catch (error) {
+        console.error("❌ Error decodificando token:", error);
+
+        // Solo eliminar el token si realmente hay un problema con su estructura
+        if (error instanceof SyntaxError || error.message.includes("Invalid token")) {
+          localStorage.removeItem("token");
+        }
+      }
+    }
+  }, [navigate]);
 
   const isGoogleRegister = !!googleData.email && !!googleData.google_id;
 

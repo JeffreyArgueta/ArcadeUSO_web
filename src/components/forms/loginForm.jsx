@@ -5,8 +5,8 @@ import Button from "@/components/buttons/Button";
 import Notification from "@/components/notifications/Notification";
 import "./loginForm.css";
 
-const LoginForm = ({ isLoged, setIsLoged }) => {
-  const { formData, errors, loading, showNotification, handleChange, handleSubmit } = useLoginForm(setIsLoged);
+const LoginForm = ({ isLogged, setIsLogged }) => {
+  const { formData, errors, loading, showNotification, handleChange, handleSubmit } = useLoginForm(setIsLogged);
 
   return (
     <>
@@ -34,7 +34,7 @@ const LoginForm = ({ isLoged, setIsLoged }) => {
         />
         {errors.password && <span className="error-message">{errors.password}</span>}
 
-        <Button text={loading ? "Cargando..." : "Iniciar Sesión"} type="submit" onClick={handleSubmit} disabled={isLoged} />
+        <Button text={loading ? "Cargando..." : "Iniciar Sesión"} type="submit" onClick={handleSubmit} disabled={isLogged} />
       </form>
     </>
   );

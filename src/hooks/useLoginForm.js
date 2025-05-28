@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { loginUser } from "@/services/api";
 import { checkEmailAvailability } from "../services/emailValidation";
 
-export const useLoginForm = (setIsLoged) => {
+export const useLoginForm = (setIsLogged) => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -43,12 +43,15 @@ export const useLoginForm = (setIsLoged) => {
     try {
       const response = await loginUser(formData);
       localStorage.setItem("token", response.data.token);
-      setIsLoged(true);
+      setIsLogged(true);
       setShowNotification(true);
-      setTimeout(() => navigate("/"), 3000);
+      setTimeout(() => navigate("/dashboard"), 3000);
     } catch (error) {
       if (error.response?.status === 401) {
         setErrors({ password: "La contraseña es incorrecta." });
+      } else {
+        console.error("Error en el inicio de sesión:", error);
+        setErrors({ general: "Ocurrió un error inesperado. Intenta nuevamente más tarde." });
       }
     }
 

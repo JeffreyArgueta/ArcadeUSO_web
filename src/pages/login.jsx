@@ -1,5 +1,6 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 import { loginWithGoogle } from "@/services/api";
 import Modal from "@/components/modals/modal";
 import GoogleButton from "@/components/buttons/googleButton";
@@ -10,6 +11,11 @@ import Link from "@/components/links/link";
 const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [isLogged, setIsLogged] = useState(false);
+
+  const handleClose = () => {
+    navigate(location.state?.from || "/");
+  };
 
   // Paso 1: Obtener la URL de Google y redirigir
   const handleGoogleLogin = async () => {
@@ -45,12 +51,33 @@ const Login = () => {
     }
   }, [navigate]);
 
+  // Paso extra: Validar existencia de token en localStorage
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+
+        if (decodedToken?.exp * 1000 > Date.now()) {
+          setIsLogged(true);
+          navigate("/dashboard");
+        } else {
+          localStorage.removeItem("token");
+        }
+      } catch (error) {
+        console.error("❌ Error decodificando token:", error);
+        localStorage.removeItem("token");
+      }
+    }
+  }, [navigate]);
+
   return (
     <div className="overlay">
-      <Modal title={"Inicia Sesión en ArcadeUSO"} onClose={() => navigate(location.state?.from || "/")}>
+      <Modal title={"Inicia Sesión en ArcadeUSO"} onClose={handleClose} disabled={isLogged}>
         <GoogleButton text="Continuar con Google" onClick={handleGoogleLogin} />
         <Separator text="o inicia sesión con" />
-        <LoginForm />
+        <LoginForm isLogged={isLogged} setIsLogged={setIsLogged} />
         <Link text="¿No tienes una cuenta?" href={"/register"} texthref={"Regístrate aquí"} />
       </Modal>
     </div>
