@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import "./InputField.css";
+import "./inputField.css";
 
 const InputField = ({ label, type, name, autocomplete, value, onChange, required = false, placeholder="" }) => {
   return (

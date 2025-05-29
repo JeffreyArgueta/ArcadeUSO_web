@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { registerUser, registerWithGoogle } from "@/services/api";
-import { checkUsernameAvailability } from "@/services/userValidation";
-import { checkEmailAvailability } from "@/services/emailValidation";
+import { registerUser, registerWithGoogle, getUserByUsername, getUserByEmail } from "@/services/api";
 
 export const useRegisterForm = (setIsRegistered, googleData = null) => {
   const navigate = useNavigate();
@@ -34,18 +32,27 @@ export const useRegisterForm = (setIsRegistered, googleData = null) => {
     let error = "";
 
     if (!value.trim()) {
-      if (name === "username") { error = "El nickname es obligatorio." }
-      else if (name === "email") { error = "El correo es obligatorio." }
-      else if (name === "password") { error = "La contraseña es obligatoria." }
-    } else if (name === "username") {
-      const isAvailable = await checkUsernameAvailability(value);
-      if (!isAvailable) error = "Este nickname ya está en uso.";
-    } else if (name === "email") {
-      const isAvailable = await checkEmailAvailability(value);
-      if (!isAvailable) error = "Este correo ya está en uso.";
+      error = name === "username" ? "El nickname es obligatorio."
+        : name === "email" ? "El correo es obligatorio."
+          : name === "password" ? "La contraseña es obligatoria."
+            : "";
+    } else {
+      try {
+        if (name === "username") {
+          const isTaken = await getUserByUsername(value);
+          if (isTaken) error = "Este nickname ya está en uso.";
+        } else if (name === "email") {
+          const isTaken = await getUserByEmail(value);
+          if (isTaken) error = "Este correo ya está en uso.";
+        }
+      } catch (err) {
+        console.error(`❌ Error validando ${name}:`, err);
+        error = "Hubo un problema al validar este campo.";
+      }
     }
 
     setErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
+    // return error;
   };
 
   const handleChange = async (event) => {
@@ -107,12 +114,5 @@ export const useRegisterForm = (setIsRegistered, googleData = null) => {
     setLoading(false);
   };
 
-  return {
-    formData,
-    errors,
-    loading,
-    showNotification,
-    handleChange,
-    handleSubmit,
-  };
+  return { formData, errors, loading, showNotification, handleChange, handleSubmit, };
 };

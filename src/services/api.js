@@ -2,40 +2,78 @@ import axios from 'axios';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-export const loginUser = async (credentials) => {
-  return axios.post(`${API_URL}/auth/login`, credentials);
-};
-
 export const registerUser = async (userData) => {
-  return axios.post(`${API_URL}/user/register`, userData);
+  return axios.post(`${API_URL}/user/`, userData);
 };
 
 export const getUserByUsername = async (userUsername) => {
-  return axios.get(`${API_URL}/user/username/${userUsername}`)
-}
+  try {
+    const response = await axios.get(`${API_URL}/user/username/${userUsername}`);
+    return response.data;
+  } catch (error) {
+    console.error("❌ Error obteniendo usuario por username:", error.response?.data || error.message);
+    throw error;
+  }
+};
 
 export const getUserByEmail = async (userEmail) => {
-  return axios.get(`${API_URL}/user/email/${userEmail}`)
-}
+  try {
+    const response = await axios.get(`${API_URL}/user/email/${userEmail}`);
+    return response.data;
+  } catch (error) {
+    console.error("❌ Error obteniendo usuario por email:", error.response?.data || error.message);
+    throw error;
+  }
+};
 
-export const getGoogleAuthURL = async () => {
-  const response = await axios.get(`${API_URL}/auth/google/auth-url`);
-  return response.data.authURL; // Devuelve la URL de autenticación
+export const loginUser = async (credentials) => {
+  try {
+    const response = await axios.post(`${API_URL}/auth/login`, credentials);
+    return response.data;
+  } catch (error) {
+    console.error("❌ Error en login:", error.response?.data || error.message);
+    throw error;
+  }
 };
 
 export const loginWithGoogle = async (code) => {
-  const response = await axios.get(`${API_URL}/auth/login/google?code=${code}`);
-  return response.data; // Devolverá el token y otra información necesaria
+  try {
+    const response = await axios.get(`${API_URL}/auth/google/login?code=${code}`);
+    return response.data;
+  } catch (error) {
+    console.error("❌ Error en login con Google:", error.response?.data || error.message);
+    throw error;
+  }
 };
 
 export const registerWithGoogle = async (googleUserData) => {
-  const response = await axios.post(`${API_URL}/register/google`, googleUserData);
-  return response.data; // Devuelve el token y los datos del usuario
+  try {
+    const response = await axios.post(`${API_URL}/auth/google/register`, googleUserData);
+    return response.data;
+  } catch (error) {
+    console.error("❌ Error registrando usuario con Google:", error.response?.data || error.message);
+    throw error;
+  }
 };
 
 export const refreshToken = async (refreshToken) => {
-  const response = await axios.post(`${API_URL}/refresh-token`, null, {
-    headers: { Authorization: `Bearer ${refreshToken}` },
-  });
-  return response.data.token; // Devuelve el nuevo JWT
+  try {
+    const response = await axios.post(`${API_URL}/auth/refresh-token`, {}, {
+      headers: { Authorization: `Bearer ${refreshToken}` },
+    });
+    return response.data.token;
+  } catch (error) {
+    console.error("❌ Error renovando token:", error.response?.data || error.message);
+    throw error;
+  }
+};
+
+export const getGoogleAuthURL = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/auth/google/auth-url`);
+    return response.data.url;
+  } catch (error) {
+    console.error("❌ Error obteniendo URL de autenticación:", error.response?.data || error.message);
+    throw error;
+  }
 };

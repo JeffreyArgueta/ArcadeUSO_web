@@ -1,8 +1,8 @@
 import { useLoginForm } from "@/hooks/useLoginForm";
 import InputField from "@/components/inputs/inputField";
 import InputPassword from "@/components/inputs/inputPassword";
-import Button from "@/components/buttons/Button";
-import Notification from "@/components/notifications/Notification";
+import Button from "@/components/buttons/button";
+import Notification from "@/components/notifications/notification";
 import "./loginForm.css";
 
 const LoginForm = ({ isLogged, setIsLogged }) => {

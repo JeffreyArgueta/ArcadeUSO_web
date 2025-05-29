@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "@/services/api";
-import { checkEmailAvailability } from "../services/emailValidation";
+import { getUserByEmail } from "../services/api";
 
 export const useLoginForm = (setIsLogged) => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -33,8 +33,8 @@ export const useLoginForm = (setIsLogged) => {
       return;
     }
 
-    const emailExists = await checkEmailAvailability(formData.email);
-    if (emailExists) {
+    const emailExists = await getUserByEmail(formData.email);
+    if (!emailExists) {
       setErrors({ email: "El correo no está registrado." });
       setLoading(false);
       return;
@@ -42,7 +42,7 @@ export const useLoginForm = (setIsLogged) => {
 
     try {
       const response = await loginUser(formData);
-      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("token", response.token);
       setIsLogged(true);
       setShowNotification(true);
       setTimeout(() => navigate("/dashboard"), 3000);

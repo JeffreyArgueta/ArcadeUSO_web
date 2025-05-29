@@ -75,7 +75,7 @@ const Login = () => {
   return (
     <div className="overlay">
       <Modal title={"Inicia Sesión en ArcadeUSO"} onClose={handleClose} disabled={isLogged}>
-        <GoogleButton text="Continuar con Google" onClick={handleGoogleLogin} />
+        <GoogleButton text="Continuar con Google" onClick={handleGoogleLogin} disabled={isLogged}/>
         <Separator text="o inicia sesión con" />
         <LoginForm isLogged={isLogged} setIsLogged={setIsLogged} />
         <Link text="¿No tienes una cuenta?" href={"/register"} texthref={"Regístrate aquí"} />
