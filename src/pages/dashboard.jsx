@@ -1,7 +1,9 @@
-// src/pages/dashboard.jsx
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode"; 
+import { jwtDecode } from "jwt-decode";
+import StatusBar from "@/components/statusbar/statusBar";
+import Content from "@/components/contents/content";
+import "@/styles/dashboard.css";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -33,16 +35,19 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <h1>🎮 Bienvenido a ArcadeUSO, {user.username}!</h1>
-      <p>Tu correo: {user.email}</p>
-      <p>Tu ID: {user.id_user}</p>
-      <p>Rol: {user.role}</p>
-      <p>Authentication_method: {user.authentication_method}</p>
-      <p>uso_coins: {user.uso_coins}</p>
-      <p>daro_points: {user.daro_points}</p>
-      <p>created_at: {user.created_at}</p>
-      <p>updated_at: {user.updated_at}</p>
-      <button onClick={handleLogout}>Cerrar sesión</button>
+      <StatusBar user={user} onLogout={handleLogout}/>
+      <Content>
+        <h1>Bienvenido al Arcade Dashboard 🎮</h1>
+        <p>Aquí puedes ver los juegos disponibles y tu estado actual.</p>
+      </Content>
+      {/* <p>Tu correo: {user.email}</p> */}
+      {/* <p>Tu ID: {user.id_user}</p> */}
+      {/* <p>Rol: {user.role}</p> */}
+      {/* <p>Authentication_method: {user.authentication_method}</p> */}
+      {/* <p>uso_coins: {user.uso_coins}</p> */}
+      {/* <p>daro_points: {user.daro_points}</p> */}
+      {/* <p>created_at: {user.created_at}</p> */}
+      {/* <p>updated_at: {user.updated_at}</p> */}
     </div>
   );
 };
