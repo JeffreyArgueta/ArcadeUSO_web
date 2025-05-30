@@ -1,0 +1,166 @@
+.status-bar {
+  position: fixed;
+  top: 0rem;
+  width: 90vw;
+  height: auto;
+  z-index: 999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 1rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin: 1.5rem auto;
+  padding: 0.2rem;
+  background-color: rgb(40, 96, 19);
+  filter: drop-shadow(4px 4px rgba(0, 0, 0, 1));
+  text-shadow: 4px 4px rgba(0, 0, 0, 1);
+  flex-wrap: wrap;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  padding: 0 .5rem;
+  gap: 0.3rem;
+  padding: 8px 12px;
+  border-radius: 1rem;
+  transition: transform 0.2s ease-in-out;
+  flex-grow: 1;
+}
+
+.status-item:hover {
+  transform: scale(1.02);
+  filter: drop-shadow(0 0 .5rem rgba(0, 0, 0, 0.5));
+  cursor: pointer;
+}
+
+.status-item:active {
+  transform: scale(0.98);
+  filter: drop-shadow(0 0 .7rem rgba(0, 0, 0, 0.5));
+}
+
+.status-icon {
+  width: 5vw;
+  height: 5vw;
+  filter: drop-shadow(4px 4px rgba(0, 0, 0, 1));
+  transition: transform 0.3s ease-in-out;
+}
+
+.status-user {
+  color: white;
+  font-size: 2rem;
+}
+
+.status-points {
+  display: flex;
+  font-size: 2rem;
+}
+
+.daro_points {
+  color: #fff365;
+}
+
+.uso_coins {
+  color: #3cb60b;
+}
+
+.logout-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 8px 12px;
+  border-radius: 1rem;
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+  flex-grow: 1;
+}
+
+.logout-item:hover {
+  transform: scale(1.02);
+  filter: drop-shadow(0 0 .5rem rgba(0, 0, 0, 0.5));
+  cursor: pointer;
+}
+
+.logout-item:active {
+  transform: scale(0.98);
+  filter: drop-shadow(0 0 .7rem rgba(0, 0, 0, 0.5));
+}
+
+.logout-span {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ff3131;
+  text-transform: uppercase;
+}
+
+.logout-icon {
+  width: 3.5vw;
+  height: 3.5vw;
+  filter: drop-shadow(4px 4px rgba(0, 0, 0, 1));
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Ajustes para pantallas medianas */
+@media (max-width: 1024px) {
+  .status-bar {
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+  }
+
+  .status-item {
+    width: 90%;
+    justify-content: center;
+    padding: 6px 10px;
+  }
+}
+
+/* Ajustes para móviles */
+@media (max-width: 768px) {
+  .status-bar {
+    padding: 0.3rem;
+    gap: 0.5rem;
+  }
+
+  .status-item {
+    width: 100%;
+    font-size: 1.5rem;
+    gap: 0.3rem;
+  }
+
+  .logout-item {
+    width: 100%;
+    justify-content: center;
+    padding: 8px 12px;
+  }
+
+  .logout-span {
+    font-size: .6rem;
+  }
+}
+
+/* Ajuste para móviles muy pequeños */
+@media (max-width: 480px) {
+  .status-bar {
+    min-height: 60px;
+    padding: 0.2rem;
+  }
+
+  .status-item {
+    font-size: 0.9rem;
+    padding: 5px 8px;
+  }
+
+  .logout-item {
+    width: 90%;
+    padding: 6px 10px;
+  }
+
+  .logout-span {
+    font-size: 0.4rem;
+  }
+}

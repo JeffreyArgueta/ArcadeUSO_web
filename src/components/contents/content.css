@@ -1,0 +1,11 @@
+.content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  align-items: center;
+  width: 90vw;
+  top: 1rem;
+  margin: 1rem auto;
+  flex-wrap: wrap;
+}
