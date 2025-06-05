@@ -11,7 +11,7 @@
 .title {
   color: #ffcc00;
   filter: drop-shadow(0.3rem 0.3rem rgba(0, 0, 0, 1));
-  font-size: 4vw;
+  font-size: 3vw;
   text-align: center;
   animation: pulseGlow 1.5s infinite alternate;
 }
@@ -22,7 +22,9 @@
   width: 100%;
 }
 
-.gameButton {
+.gameButtonGachapon, 
+.gameButtonMinesweeper,
+.gameButtonTiktaktoe {
   position: relative;
   width: 30vw;
   flex: 4;
@@ -40,26 +42,32 @@
 
 }
 
-.gameButton:hover {
+.gameButtonGachapon:hover, 
+.gameButtonMinesweeper:hover,
+.gameButtonTiktaktoe:hover {
   transform: scale(0.95) rotate(2deg);
 }
 
-.gameButton:active {
+.gameButtonGachapon:active, 
+.gameButtonMinesweeper:active,
+.gameButtonTiktaktoe:active {
   transform: scale(1.05);
 }
 
 .nameGame {
   position: absolute;
   color: white;
-  text-shadow: 2px 2px 2px #000000;
+  text-shadow: 5px 5px 1px #000000;
   font-size: 2vw;
   right: 2.5vw;
+  bottom: 2.3vw;
   /* right: 35px; */
   /* bottom: 35px; */
-  bottom: 2.5vw;
+  
 }
 
-.gameButton img {
+.gameButtonGachapon img,  
+.gameButtonTiktaktoe img{
   width: 100%;
   height: 100%;
   filter: drop-shadow(0 2px 5px rgb(15, 34, 8, 0.75));
@@ -67,7 +75,18 @@
   transition: transform ease 0.4s;
 }
 
-.gameButton img:hover {
+.gameButtonMinesweeper img {
+  width: 60%;
+  height: 85%;
+  filter: drop-shadow(0 2px 5px rgb(15, 34, 8, 0.75));
+  transition: transform ease 0.4s;
+}
+
+.gameButtonGachapon img:hover {
+  transform: scale(1.45) rotate(-2deg) translate(3px, 27px);
+}
+
+.gameButtonMinesweeper img:hover {
   transform: scale(1.45) rotate(-2deg) translate(3px, 27px);
 }
 
@@ -102,12 +121,16 @@
     align-items: center;
   }
 
-  .gameButton {
+  .gameButtonGachapon, 
+  .gameButtonMinesweeper,
+  .gameButtonTiktaktoe {
     width: 25vh;
     min-width: 150px;
   }
 
-  .gameButton img {
+  .gameButtonGachapon img, 
+  .gameButtonMinesweeper img,
+  .gameButtonTiktaktoe img {
     transform: scale(1.25) translateY(25px);
   }
 

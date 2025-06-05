@@ -8,6 +8,8 @@ import "./index.css";
 // Aquí debe añadir todas las imagenes de miniatura para los juegos
 // Luego los añades al botón así " <img src={nombredelImport}/> "
 import imgGachapon from "@/assets/Gachapon/Inserte Moneda.gif";
+import imgMinesweeper from "@/assets/Buscaminas/Bomba.gif";
+
 
 const Content = ({ selectedGame, setSelectedGame }) => {
   const { sounds } = useSound();
@@ -25,14 +27,15 @@ const Content = ({ selectedGame, setSelectedGame }) => {
           <h1 className="title">Selecciona un juego</h1>
 
           <div className="gameSelection">
-            <button onClick={() => handleClick("minesweeper")} className="gameButton">
+            <button onClick={() => handleClick("minesweeper")} className="gameButtonMinesweeper">
+              <img src={imgMinesweeper} />
               <span className="nameGame">Buscaminas</span>
             </button>
-            <button onClick={() => handleClick("gachapon")} className="gameButton">
+            <button onClick={() => handleClick("gachapon")} className="gameButtonGachapon">
               <img src={imgGachapon} />
               <span className="nameGame">Gachapon</span>
             </button>
-            <button onClick={() => handleClick("tiktaktoe")} className="gameButton">
+            <button onClick={() => handleClick("tiktaktoe")} className="gameButtonTiktaktoe">
               <span className="nameGame">Tic Tac Toe</span>
             </button>
 
