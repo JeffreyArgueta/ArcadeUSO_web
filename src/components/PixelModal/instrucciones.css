@@ -161,21 +161,26 @@
   margin-right: auto;
 }
 
-@media (max-width: 480px) {
+@media (width <= 480px){ 
+
+  .instrucciones-contenido {
+    position: relative;
+    left: -10px;
+  }
 
   .instrucciones-contenido,
   .instrucciones-contenido p {
-    font-size: 0.65rem;
-    max-width: 95vw;
+    font-size: 0.6rem;
+    min-width: 50vw;
     padding: 0;
   }
 
   .instrucciones-contenido h1 {
-    font-size: 0.9rem;
+    font-size: 0.7rem;
   }
 
   .instrucciones-contenido h2 {
-    font-size: 0.8rem;
+    font-size: 0.6rem;
   }
 
   .instrucciones-contenido button {
@@ -184,6 +189,6 @@
   }
 
   .Alineado-Izquierda {
-    max-width: 90%;
+    max-width: 100%;
   }
 }
