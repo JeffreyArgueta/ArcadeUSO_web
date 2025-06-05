@@ -21,6 +21,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+::selection {
+  background-color: #ffe865;
+  color: #64511d;
+}
+
+::-moz-selection {
+  background-color: #ffe865;
+  color: #64511d;
+}
+
 button {
   font-family: "Press Start 2P", system-ui;
 }
