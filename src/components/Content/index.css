@@ -39,13 +39,21 @@
   background-image: url("@/assets/tarjeta.png");
   background-size: contain;
   filter: drop-shadow(10px 10px rgb(15, 34, 8, 0.75));
-
+  transition: transform ease 0.4s;
 }
 
+/* Hover para el fondo del boton */
 .gameButtonGachapon:hover, 
 .gameButtonMinesweeper:hover,
 .gameButtonTiktaktoe:hover {
   transform: scale(0.95) rotate(2deg);
+}
+
+/* Hover para la imagen dentro del boton */
+.gameButtonGachapon:hover img,
+.gameButtonMinesweeper:hover img,
+.gameButtonTiktaktoe:hover img {
+  transform: scale(1.45) rotate(-2deg) translate(3px, 27px);
 }
 
 .gameButtonGachapon:active, 
@@ -61,6 +69,7 @@
   font-size: 2vw;
   right: 2.5vw;
   bottom: 2.3vw;
+  pointer-events: none;
   /* right: 35px; */
   /* bottom: 35px; */
   
@@ -80,14 +89,6 @@
   height: 85%;
   filter: drop-shadow(0 2px 5px rgb(15, 34, 8, 0.75));
   transition: transform ease 0.4s;
-}
-
-.gameButtonGachapon img:hover {
-  transform: scale(1.45) rotate(-2deg) translate(3px, 27px);
-}
-
-.gameButtonMinesweeper img:hover {
-  transform: scale(1.45) rotate(-2deg) translate(3px, 27px);
 }
 
 /* Contenedor de Juegos */
