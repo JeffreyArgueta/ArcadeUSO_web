@@ -1,0 +1,92 @@
+.statusBar {
+  width: 100%;
+  background-color: rgb(40, 96, 19);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 1rem;
+  padding: 0.25rem 0.5rem;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.statusUser,
+.statusPoints {
+  display: flex;
+  align-items: center;
+  font-size: clamp(1rem, 3vw, 2.5rem);
+  filter: drop-shadow(4px 4px rgba(0, 0, 0, 1));
+  color: white;
+}
+
+.daroPoints {
+  color: #fff365;
+}
+
+.usoCoins {
+  color: #3cb60b;
+}
+
+@media (max-width: 600px) {
+  .statusBar {
+    flex-direction: column;
+    align-items: center;
+    /* width: 90%; */
+  }
+
+  .statusUser,
+  .statusPoints {
+    /* flex-direction: column; */
+    align-items: center;
+  }
+
+  /* .statusItem { */
+  /*   flex-direction: row; */
+  /* } */
+}
+
+
+
+
+
+
+/* .logoutModal { */
+/*   position: fixed; */
+/*   z-index: 9999; */
+/*   top: 50%; */
+/*   left: 50%; */
+/*   transform: translate(-50%, -50%); */
+/*   background: rgba(40, 96, 19, 0.9); */
+/*   padding: 1rem; */
+/*   border-radius: 8px; */
+/*   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); */
+/*   text-align: center; */
+/*   color: white; */
+/* } */
+/**/
+/* .modalActions { */
+/*   display: flex; */
+/*   justify-content: space-around; */
+/*   margin-top: 1rem; */
+/* } */
+/**/
+/* .cancelButton, .confirmButton { */
+/*   padding: 0.5rem 1rem; */
+/*   border: none; */
+/*   cursor: pointer; */
+/*   font-size: 1rem; */
+/*   border-radius: 5px; */
+/* } */
+/**/
+/* .cancelButton { */
+/*   background: #e74c3c; */
+/*   color: white; */
+/* } */
+/**/
+/* .confirmButton { */
+/*   background: #27ae60; */
+/*   color: white; */
+/* } */
+/**/
+/* .cancelButton:hover, .confirmButton:hover { */
+/*   opacity: 0.8; */
+/* } */

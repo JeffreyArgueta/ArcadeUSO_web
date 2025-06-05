@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "@/services/api";
-import { getUserByEmail } from "../services/api";
+import { loginUser, getUserByEmail } from "@/services/api";
 
-export const useLoginForm = (setIsLogged) => {
+export const useLoginForm = (setIsLogged, handlebackground, handleButton) => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -45,7 +44,10 @@ export const useLoginForm = (setIsLogged) => {
       localStorage.setItem("token", response.token);
       setIsLogged(true);
       setShowNotification(true);
-      setTimeout(() => navigate("/dashboard"), 3000);
+      setTimeout(() => {
+        handlebackground.stop();
+        navigate("/Dashboard");
+      }, 2500);
     } catch (error) {
       if (error.response?.status === 401) {
         setErrors({ password: "La contraseña es incorrecta." });
@@ -63,6 +65,7 @@ export const useLoginForm = (setIsLogged) => {
     errors,
     loading,
     showNotification,
+    setShowNotification,
     handleChange,
     handleSubmit,
   };

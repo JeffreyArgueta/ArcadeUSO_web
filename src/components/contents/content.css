@@ -2,10 +2,11 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  align-content: stretch;
+  /* align-content: center; */
   align-items: center;
-  width: 90vw;
+  width: 95%;
   top: 1rem;
   margin: 1rem auto;
   flex-wrap: wrap;
+  z-index: 2;
 }

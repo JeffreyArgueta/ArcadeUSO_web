@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { registerUser, registerWithGoogle, getUserByUsername, getUserByEmail } from "@/services/api";
 
-export const useRegisterForm = (setIsRegistered, googleData = null) => {
-  const navigate = useNavigate();
+export const useRegisterForm = (setIsRegistered, googleData = null, switchToLogin) => {
   const isGoogle = !!googleData;
 
   const [formData, setFormData] = useState({
@@ -18,16 +16,6 @@ export const useRegisterForm = (setIsRegistered, googleData = null) => {
   const [loading, setLoading] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
 
-  // Cargar datos de Google al montar si están disponibles
-  useEffect(() => {
-    if (isGoogle && googleData.name) {
-      setFormData((prev) => ({
-        ...prev,
-        username: googleData.name.replace(/\s+/g, "").toLowerCase(),
-      }));
-    }
-  }, [googleData]);
-
   const validateField = async (name, value) => {
     let error = "";
 
@@ -37,22 +25,28 @@ export const useRegisterForm = (setIsRegistered, googleData = null) => {
           : name === "password" ? "La contraseña es obligatoria."
             : "";
     } else {
-      try {
-        if (name === "username") {
+
+      if (name === "username") {
+        if (value.length < 3 || value.length > 12) {
+          error = "El nickname es invalido [3-12 caracteres]";
+        } else {
           const isTaken = await getUserByUsername(value);
-          if (isTaken) error = "Este nickname ya está en uso.";
-        } else if (name === "email") {
+          if (isTaken) error = "Este nickname ya está en uso."
+        }
+      } else if (name === "email") {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+          error = "El correo no tiene un formato válido.";
+        } else {
           const isTaken = await getUserByEmail(value);
           if (isTaken) error = "Este correo ya está en uso.";
         }
-      } catch (err) {
-        console.error(`❌ Error validando ${name}:`, err);
-        error = "Hubo un problema al validar este campo.";
+      } else if (name === "password") {
+        if (value.length < 4) error = "La contraseña debe tener al menos 4 caracteres.";
       }
     }
 
     setErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
-    // return error;
   };
 
   const handleChange = async (event) => {
@@ -106,7 +100,7 @@ export const useRegisterForm = (setIsRegistered, googleData = null) => {
 
       setIsRegistered(true);
       setShowNotification(true);
-      setTimeout(() => navigate("/login"), 3000);
+      setTimeout(() => { switchToLogin(); }, 3200);
     } catch (error) {
       console.error("❌ Error al registrar usuario:", error);
     }
@@ -114,5 +108,5 @@ export const useRegisterForm = (setIsRegistered, googleData = null) => {
     setLoading(false);
   };
 
-  return { formData, errors, loading, showNotification, handleChange, handleSubmit, };
+  return { formData, errors, loading, showNotification, setShowNotification, handleChange, handleSubmit };
 };

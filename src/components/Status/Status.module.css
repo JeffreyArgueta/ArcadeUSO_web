@@ -1,0 +1,11 @@
+/* .statusBar { */
+/*   z-index: 999; */
+/* } */
+
+.statusContainer {
+  position: fixed;
+  display: flex;
+  width: 95%;
+  top: 1rem;
+  flex-direction: column;
+}

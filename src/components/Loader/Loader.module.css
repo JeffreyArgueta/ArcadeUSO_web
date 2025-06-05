@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.loaderContainer {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.enter { animation: fadeIn 0.5s forwards; }
+
+.exit { animation: fadeOut 0.5s forwards; }
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: scale(1.5); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.5); }
+}
+
+.loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.loadingGif {
+    width: 40vw;
+    height: 40vw;
+    max-width: 45vh;
+    max-height: 45vh;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-top: 5px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loadingText {
+  text-align: center;
+  margin-top: 10px;
+  color: white;
+  font-size: 16px;
+  animation: blink 1.25s infinite steps(1);
+}
+
+/* .loadingText { */
+/*     font-family: 'Press Start 2P', system-ui; */
+/*     background-color: #1d3f11; */
+/*     text-shadow: 4px 4px #1d3f11; */
+/*     font-size: 1.8dvh; */
+/*     text-align: center; */
+/* } */
+
+/* @keyframes spin { */
+/*   from { transform: rotate(0deg); } */
+/*   to { transform: rotate(360deg); } */
+/* } */
+
+.setup {
+    color: #f0c040;
+    text-shadow: 2px 2px #b18200a9;
+    animation: blink 1.25s infinite steps(2);
+    opacity: 1;
+}
+
+.fadeTransition {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    transition: opacity 1s ease;
+}
+
+.hideContent {
+    opacity: 0;
+}
+
+.showContent {
+    opacity: 1;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+    25%, 75% { opacity: 0.8; }
+}

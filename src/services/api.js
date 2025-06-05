@@ -26,6 +26,20 @@ export const getUserByEmail = async (userEmail) => {
   }
 };
 
+export const updateUser = async (idUser, userData) => {
+  try {
+    const response = await axios.put(`${API_URL}/user/${idUser}`, userData, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`, // Si necesitas autenticación
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("❌ Error actualizando usuario:", error.response?.data || error.message);
+    throw error;
+  }
+};
+
 export const loginUser = async (credentials) => {
   try {
     const response = await axios.post(`${API_URL}/auth/login`, credentials);

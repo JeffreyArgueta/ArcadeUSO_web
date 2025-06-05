@@ -1,0 +1,39 @@
+.Link {
+  text-align: center;
+  font-size: 14px;
+  text-shadow: 2.5px 2.5px rgba(0, 0, 0, 1);
+}
+
+.Link span {
+  color: #ffd000;
+  text-decoration: none;
+  display: inline-block;
+  animation: glow-text 3s infinite ease-in-out;
+}
+
+
+.Link span:hover {
+  color: #ffc300;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.Link span:active {
+  color: #d0a030;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+
+.disabledLink {
+  pointer-events: none; /* 🔹 Deshabilita clics */
+  opacity: 0.6; /* 🔹 Reduce visibilidad */
+  cursor: not-allowed; /* 🔹 Indica que está inactivo */
+}
+
+@keyframes glow-text {
+  0% { text-shadow: 0 0 2px rgba(255, 208, 0, 0.5); }
+
+  50% { text-shadow: 0 0 10px rgba(255, 208, 0, 0.8); }
+
+  100% { text-shadow: 0 0 2px rgba(255, 208, 0, 0.5); }
+}

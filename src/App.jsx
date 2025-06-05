@@ -1,43 +1,33 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Routes, Route } from 'react-router-dom';
-import Home from '@/pages/home';
-import Login from '@/pages/login';
-import Register from '@/pages/register';
-import Dashboard from '@/pages/dashboard';
-import NotFound from "@/pages/notFound";
-import PrivateRoute from '@/components/routes/PrivateRoute'; // ✅
+import React, { useState, useEffect } from "react";
+import Loader from "@/components/Loader";
+import AppRoutes from "@/routes";
 
 function App() {
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [isExiting, setIsExiting] = useState(false);
+
+  useEffect(() => {
+    const exitTimer = setTimeout(() => {
+      setIsExiting(true); // 🔄 Activar animación de salida
+      const loadingTimer = setTimeout(() => setLoading(false), 500); // 🔥 Esconder Loader después de animación
+      return () => clearTimeout(loadingTimer);
+    }, 2000);
+
+    return () => clearTimeout(exitTimer); // ✅ Limpieza al desmontar el componente
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.key === 'Backspace' && !event.target.matches('input, textarea')) {
+      if (event.key === "Backspace" && !event.target.matches("input, textarea")) {
         event.preventDefault();
       }
     };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   return (
-    <Routes>
-      {/* Rutas públicas */}
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-
-      {/* Rutas privadas */}
-      <Route element={<PrivateRoute />}>
-        <Route path="/dashboard" element={<Dashboard />} />
-
-      </Route>
-      {/* Esta captura cualquier ruta no existente */}
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    loading ? <Loader isExiting={isExiting} setIsExiting={setIsExiting} /> : <AppRoutes />
   );
 }
 
