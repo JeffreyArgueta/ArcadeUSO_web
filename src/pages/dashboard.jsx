@@ -49,7 +49,7 @@ const Dashboard = () => {
 
   return (
     <div className={styles.Overlay}>
-      <div className={styles.Container}>
+      
         {showConfirm && (
           <div className={styles.logoutOverlay}>
             <LogoutModal onConfirm={handleConfirmLogout} onCancel={handleCancel} />
@@ -65,11 +65,13 @@ const Dashboard = () => {
           />
         ) : (
           <>
+          <div className={styles.Container}>
             <Status user={user} onLogout={handleLogoutClick} />
             <Content />
+          </div>
+            
           </>
         )}
-      </div>
     </div>
     //   <p>Tu correo: {user.email}</p>
     //   <p>Tu ID: {user.id_user}</p>

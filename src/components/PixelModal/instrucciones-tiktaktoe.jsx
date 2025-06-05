@@ -7,6 +7,7 @@ const InstruccionesModal = React.memo(({ onClose }) => {
   const { sounds } = useSound();
   const { click } = sounds;
   const [closing, setClosing] = useState(false);
+  const [entering, setEntering] = useState(true); 
 
   const handleClose = useCallback(() => {
     click.play();
@@ -14,8 +15,15 @@ const InstruccionesModal = React.memo(({ onClose }) => {
     setTimeout(onClose, 300); // Espera 300ms para que la animación de cierre termine
   }, [onClose]);
 
+  React.useEffect(() => {
+      const timer = setTimeout(() => {
+        setEntering(false);
+      }, 300);
+      return () => clearTimeout(timer);
+    }, []);
+
   return (
-    <div className={`instrucciones-modal ${closing ? "salir" : ""}`}>
+    <div className={`instrucciones-modal ${entering ? "entrar" : ""} ${closing ? "salir" : ""}`}>
       <PixelFrame>
         <div className="instrucciones-contenido">
           <h1>¡Bienvenido a X0!</h1>
