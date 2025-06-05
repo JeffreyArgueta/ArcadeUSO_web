@@ -4,13 +4,14 @@ import { jwtDecode } from "jwt-decode";
 import LogoutModal from "@/components/LogoutModal";
 import NicknameForm from "@/components/Nickname";
 import Status from "@/components/Status";
-import Content from "../components/Content";
+import Content from "@/components/Content";
 import styles from "./Dashboard.module.css"
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [selectedGame, setSelectedGame] = useState(null);
   const [isNicknameUpdated, setIsNicknameUpdated] = useState(false);
   const [container, setContainer] = useState("nickname");
 
@@ -47,31 +48,33 @@ const Dashboard = () => {
 
   if (!user) return <p>Cargando...</p>;
 
+
   return (
     <div className={styles.Overlay}>
-      
-        {showConfirm && (
-          <div className={styles.logoutOverlay}>
-            <LogoutModal onConfirm={handleConfirmLogout} onCancel={handleCancel} />
-          </div>
-        )}
-        {container === "nickname" ? (
-          <NicknameForm
-            user={user}
-            setUser={setUser}
-            isNicknameUpdated={isNicknameUpdated}
-            setIsNicknameUpdated={setIsNicknameUpdated}
-            switchToDashboard={() => setContainer("dashboard")}
-          />
-        ) : (
-          <>
+
+      {showConfirm && (
+        <div className={styles.logoutOverlay}>
+          <LogoutModal onConfirm={handleConfirmLogout} onCancel={handleCancel} />
+        </div>
+      )}
+      {container === "nickname" ? (
+        <NicknameForm
+          user={user}
+          setUser={setUser}
+          isNicknameUpdated={isNicknameUpdated}
+          setIsNicknameUpdated={setIsNicknameUpdated}
+          switchToDashboard={() => setContainer("dashboard")}
+        />
+      ) : (
+        <>
           <div className={styles.Container}>
-            <Status user={user} onLogout={handleLogoutClick} />
-            <Content />
+            <Status user={user} selectedGame={selectedGame} setSelectedGame={setSelectedGame} onLogout={handleLogoutClick} />
+            <Content selectedGame={selectedGame} setSelectedGame={setSelectedGame} />
           </div>
-            
-          </>
-        )}
+
+        </>
+      )}
+
     </div>
     //   <p>Tu correo: {user.email}</p>
     //   <p>Tu ID: {user.id_user}</p>

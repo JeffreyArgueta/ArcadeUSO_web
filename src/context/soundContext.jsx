@@ -5,8 +5,10 @@ const SoundContext = createContext(null);
 
 const sounds = {
   click: new Howl({ src: ["/sounds/click.mp3"], volume: 0.5 }),
+  logout: new Howl({ src: ["/sounds/logout.mp3"], volume: 1 }),
   background: new Howl({ src: ["/sounds/8-bit-loop-189494.mp3"], volume: 0.3, loop: true }),
   button: new Howl({ src: ["/sounds/button.mp3"], volume: 1 }),
+  playGame: new Howl({ src: ["/sounds/selectionGame.mp3"], volume: 1 }),
   coin: new Howl({ src: ["/sounds/coin-insert.wav"], volume: 0.5, delay: 650 }),
   volumeAlert: new Howl({ src: ["/sounds/volume-alert.mp3"], volume: 1 }),
   comun: new Howl(

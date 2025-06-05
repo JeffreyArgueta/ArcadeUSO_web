@@ -4,7 +4,9 @@ import VolumeControl from "@/components/VolumeControl";
 import styles from "./StatusBarSecond.module.css";
 import leaderboardIcon from "@/assets/leaderboard.png";
 
-const StatusBarSecond = () => {
+const StatusBarSecond = ({ selectedGame, setSelectedGame }) => {
+  console.log("Props en StatusBarSecond:", { selectedGame, setSelectedGame });
+
   return (
     <div className={styles.statusBarSecond}>
       <div>
@@ -12,7 +14,12 @@ const StatusBarSecond = () => {
           <VolumeControl className={styles.statusIcon} />
         </StatusItem>
       </div>
-      <div>
+      <div className={styles.options}>
+        <button className={styles.return}
+          onClick={() => setSelectedGame(null)}
+          hidden={selectedGame === null}
+          type="button">Regresar
+        </button>
         <StatusItem icon={leaderboardIcon} alt="Ver Puntuaciones" />
       </div>
     </div>

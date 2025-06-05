@@ -14,6 +14,7 @@ import passwordOn from "@/assets/password_on.png";
 import passwordOff from "@/assets/password_off.png";
 import shutdown from "@/assets/shutdown.png";
 import google from "@/assets/google.png";
+import tarjeta from "@/assets/tarjeta.png";
 import cornerUL from "@/assets/corners/upper_left.png";
 import cornerUR from "@/assets/corners/upper_right.png";
 import cornerBL from "@/assets/corners/bottom_left.png";
@@ -39,6 +40,7 @@ const imageAssets = [
   passwordOff,
   shutdown,
   google,
+  tarjeta,
   cornerUL,
   cornerUR,
   cornerBL,

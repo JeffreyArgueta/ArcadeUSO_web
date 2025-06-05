@@ -20,11 +20,9 @@
   align-items: center;
   gap: clamp(1rem, 3vw, 2rem);
   width: clamp(300px, 90%, 450px);
-
   height: 100vh;
   justify-content: center;
   align-items: center;
-
   /* min-height: 0vh; */
 }
 
@@ -50,12 +48,8 @@
   padding: 0.5rem 1rem;
   width: 100%;
   background: #ff2200;
-  /* background: linear-gradient(45deg, #ff2200, #ff6600); */
-
   text-shadow: 4px 4px rgba(0, 0, 0, 0.6);
-
   color: #fff;
-  /* border: 3px solid #fff; */
   border-radius: 1rem;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;

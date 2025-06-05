@@ -1,13 +1,11 @@
-/* instrucciones-modal.css */
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
 .instrucciones-modal {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(0.3rem);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -24,6 +22,7 @@
     opacity: 1;
     transform: scale(1);
   }
+
   100% {
     opacity: 0;
     transform: scale(1.5);
@@ -39,12 +38,12 @@
     opacity: 0;
     transform: scale(1.5);
   }
+
   100% {
     opacity: 1;
     transform: scale(1);
   }
 }
-
 
 .instrucciones-contenido {
   padding: 0.5rem;
@@ -58,10 +57,10 @@
 }
 
 .Alineado-Izquierda {
-    text-align: left;
-    margin: 0 auto auto;
-    max-width: 22rem;
-  }
+  text-align: left;
+  margin: 0 auto auto;
+  max-width: 22rem;
+}
 
 .instrucciones-contenido h1 {
   color: #f0c040;
@@ -112,6 +111,21 @@
   text-shadow: 2px 2px #3c3c18;
 }
 
+.instrucciones-contenido .facil {
+  color: #8fcf88;
+  text-shadow: 2px 2px #3c3c18;
+}
+
+.instrucciones-contenido .medio {
+  color: #ffb778;
+  text-shadow: 2px 2px #3c3c18;
+}
+
+.instrucciones-contenido .dificil {
+  color: #ff6600;
+  text-shadow: 2px 2px #3c3c18;
+}
+
 .instrucciones-contenido button {
   margin-top: 1.5rem;
   padding: 0.8rem 1.6rem;
@@ -133,9 +147,9 @@
 }
 
 .instrucciones-contenido button:active {
-  transform: translateY(4px);  
+  transform: translateY(4px);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-  background-color: #d0a030;  
+  background-color: #d0a030;
 }
 
 /* Asegura que el contenido no sea demasiado ancho */
@@ -148,26 +162,28 @@
 }
 
 @media (max-width: 480px) {
-    .instrucciones-contenido, .instrucciones-contenido p {
-      font-size: 0.65rem;
-      max-width: 95vw;
-      padding: 0;
-    }
-  
-    .instrucciones-contenido h1 {
-      font-size: 0.9rem;
-    }
-  
-    .instrucciones-contenido h2 {
-      font-size: 0.8rem;
-    }
-  
-    .instrucciones-contenido button {
-      font-size: 0.6rem;
-      padding: 0.6rem 1rem;
-    }
-  
-    .Alineado-Izquierda {
-      max-width: 90%;
-    }
+
+  .instrucciones-contenido,
+  .instrucciones-contenido p {
+    font-size: 0.65rem;
+    max-width: 95vw;
+    padding: 0;
   }
+
+  .instrucciones-contenido h1 {
+    font-size: 0.9rem;
+  }
+
+  .instrucciones-contenido h2 {
+    font-size: 0.8rem;
+  }
+
+  .instrucciones-contenido button {
+    font-size: 0.6rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .Alineado-Izquierda {
+    max-width: 90%;
+  }
+}

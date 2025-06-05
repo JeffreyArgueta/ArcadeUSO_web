@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import PixelFrame from "./pixel-frame.jsx";
 import { useSound } from "@/context/soundContext";
-import "./instrucciones-gachapon.css";
+import "./instrucciones.css";
 
 const InstruccionesModal = React.memo(({ onClose }) => {
   const { sounds } = useSound();
