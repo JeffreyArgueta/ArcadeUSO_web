@@ -1,14 +1,8 @@
 import PropTypes from "prop-types";
-import { useEffect } from "react";
 import CloseButton from "@/components/CloseButton";
 import styles from "./Modal.module.css";
 
 const Modal = ({ title, children, disabled, onClose, }) => {
-
-  useEffect(() => {
-    console.log("Modal montado");
-  }, []);
-
   return (
     <div className={styles.Modal}>
       <CloseButton onClose={onClose} disabled={disabled} />

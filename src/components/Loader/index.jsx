@@ -14,6 +14,14 @@ import passwordOn from "@/assets/password_on.png";
 import passwordOff from "@/assets/password_off.png";
 import shutdown from "@/assets/shutdown.png";
 import google from "@/assets/google.png";
+import cornerUL from "@/assets/corners/upper_left.png";
+import cornerUR from "@/assets/corners/upper_right.png";
+import cornerBL from "@/assets/corners/bottom_left.png";
+import cornerBR from "@/assets/corners/bottom_left.png";
+import borderU from "@/assets/borders/up.png";
+import borderD from "@/assets/borders/down.png";
+import borderL from "@/assets/borders/left.png";
+import borderR from "@/assets/borders/right.png";
 
 import styles from "./Loader.module.css";
 
@@ -30,7 +38,15 @@ const imageAssets = [
   passwordOn,
   passwordOff,
   shutdown,
-  google
+  google,
+  cornerUL,
+  cornerUR,
+  cornerBL,
+  cornerBR,
+  borderU,
+  borderD,
+  borderL,
+  borderR
 ];
 
 const loadAssets = () => {
