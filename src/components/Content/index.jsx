@@ -9,6 +9,7 @@ import "./index.css";
 // Luego los añades al botón así " <img src={nombredelImport}/> "
 import imgGachapon from "@/assets/Gachapon/Inserte Moneda.gif";
 import imgMinesweeper from "@/assets/Buscaminas/Bomba.gif";
+import x0 from "@/assets/Tiktaktoe/x0.gif";
 
 
 const Content = ({ user, setUser, selectedGame, setSelectedGame }) => {
@@ -36,6 +37,7 @@ const Content = ({ user, setUser, selectedGame, setSelectedGame }) => {
               <span className="nameGame">Gachapon</span>
             </button>
             <button onClick={() => handleClick("tiktaktoe")} className="gameButtonTiktaktoe">
+              <img src={x0} />
               <span className="nameGame">Tic Tac Toe</span>
             </button>
 
