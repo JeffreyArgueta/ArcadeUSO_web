@@ -36,8 +36,15 @@ const Gachapon = ({ user, setUser }) => {
         gachaMachine.src = coinInserted;
         break;
       case "showing":
-        if (reward) {
-          switch (reward.rarity.toLowerCase()) {
+        let rarity = null;
+        if (reward && typeof reward === "object" && reward.rarity) {
+          rarity = reward.rarity;
+        } else if (typeof reward === "string") {
+          rarity = reward;
+        }
+
+        if (rarity) {
+          switch (rarity.toLowerCase()) {
             case "common":
               comun.play();
               break;
@@ -48,10 +55,12 @@ const Gachapon = ({ user, setUser }) => {
               legendario.play();
               break;
             default:
-              console.error("Rareza no encontrada:", reward.rarity);
+              console.error("Rareza no encontrada:", rarity);
               break;
           }
-          gachaMachine.src = getRewardGif(reward.rarity);
+          gachaMachine.src = getRewardGif(rarity);
+        } else {
+          console.error("Reward o reward.rarity es undefined o reward no es objeto:", reward);
         }
         break;
       default:
@@ -81,6 +90,7 @@ const Gachapon = ({ user, setUser }) => {
   };
 
   const getRewardGif = (rarity) => {
+    if (!rarity) return insertCoin;
     switch (rarity.toLowerCase()) {
       case "common": return common;
       case "epic": return epic;
