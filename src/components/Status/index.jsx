@@ -3,12 +3,12 @@ import StatusBar from "./StatusBar";
 import StatusBarSecond from "./StatusBarSecond";
 import styles from "./Status.module.css"
 
-const Status = ({ user, selectedGame, setSelectedGame, showLeaderboard, onLogout }) => {
+const Status = ({ user, selectedGame, setSelectedGame, setShowLeaderboard, onLogout }) => {
 
   return (
     <div className={styles.statusContainer}>
       <StatusBar user={user} onLogout={onLogout} />
-      <StatusBarSecond selectedGame={selectedGame} setSelectedGame={setSelectedGame} showLeaderboard={showLeaderboard} />
+      <StatusBarSecond selectedGame={selectedGame} setSelectedGame={setSelectedGame} setShowLeaderboard={setShowLeaderboard} />
     </div>
   );
 };

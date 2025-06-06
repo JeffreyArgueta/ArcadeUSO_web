@@ -105,3 +105,22 @@ export const getGoogleAuthURL = async () => {
     throw error;
   }
 };
+
+export const getTopLeaderboard = async () => {
+  try {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      throw new Error("⚠️ Token no encontrado. Inicia sesión para acceder al leaderboard.");
+    }
+
+    const response = await axios.get(`${API_URL}/user/leaderboard`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("❌ Error obteniendo el leaderboard:", error.response?.data || error.message);
+    throw error;
+  }
+};
