@@ -108,20 +108,30 @@ html, body {
 
 .nubes {
   position: absolute;
+<<<<<<< Updated upstream
   height: 200px;       /* Valor fijo en px */
+=======
+  height: 250px;
+  /* Valor fijo en px */
+>>>>>>> Stashed changes
   width: auto;
   z-index: 200;
   filter: drop-shadow(0 0 5px rgba(15,34,8,0.5));
 }
 
 .nubes-izquierda {
+<<<<<<< Updated upstream
   top: 150px;
   left: 50px;
+=======
+  top: 100px;
+  left: -250px;
+>>>>>>> Stashed changes
 }
 
 .nubes-derecha {
-  top: 150px;
-  right: 50px;
+  top: 100px;
+  right: -250px;
   transform: scaleX(-1);
 }
 
