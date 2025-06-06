@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { getUserById } from "@/services/api"
 import LogoutModal from "@/components/LogoutModal";
+import LeaderboardModal from "@/components/LeaderboardModal";
 import NicknameForm from "@/components/Nickname";
 import Status from "@/components/Status";
 import Content from "@/components/Content";
@@ -12,6 +13,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [selectedGame, setSelectedGame] = useState(null);
   const [isNicknameUpdated, setIsNicknameUpdated] = useState(false);
   const [container, setContainer] = useState("nickname");
@@ -23,6 +25,8 @@ const Dashboard = () => {
     localStorage.removeItem("token");
     navigate("/");
   };
+
+  const handleClose = () => setShowLeaderboard(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -73,6 +77,13 @@ const Dashboard = () => {
           <LogoutModal onConfirm={handleConfirmLogout} onCancel={handleCancel} />
         </div>
       )}
+
+      {showLeaderboard && (
+        <div className={styles.logoutOverlay}>
+          <LeaderboardModal onClose={handleClose} />
+        </div>
+      )}
+
       {container === "nickname" ? (
         <NicknameForm
           user={user}
@@ -84,7 +95,13 @@ const Dashboard = () => {
       ) : (
         <>
           <div className={styles.Container}>
-            <Status user={user} selectedGame={selectedGame} setSelectedGame={setSelectedGame} onLogout={handleLogoutClick} />
+            <Status
+                user={user}
+                selectedGame={selectedGame}
+                setSelectedGame={setSelectedGame}
+                showLeaderboard={showLeaderboard}
+                onLogout={handleLogoutClick}
+            />
             <Content
               user={user}
               setUser={setUser}
