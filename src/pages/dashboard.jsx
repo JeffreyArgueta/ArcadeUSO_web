@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { getUserById } from "@/services/api"
 import LogoutModal from "@/components/LogoutModal";
 import NicknameForm from "@/components/Nickname";
 import Status from "@/components/Status";
@@ -32,7 +33,23 @@ const Dashboard = () => {
 
     try {
       const decoded = jwtDecode(token);
-      setUser(decoded);
+
+      // 🔥 Nueva llamada a la API para obtener datos reales del usuario
+      const fetchUser = async () => {
+        try {
+          const updatedUser = await getUserById(decoded.id_user);
+          if (updatedUser) {
+            setUser(updatedUser); // 🔥 Ahora usamos la versión actualizada del usuario
+          }
+        } catch (error) {
+          console.error("❌ Error obteniendo datos del usuario:", error);
+          localStorage.removeItem("token");
+          navigate("/");
+        }
+      };
+
+      fetchUser();
+
     } catch (error) {
       console.error("❌ Token inválido:", error);
       localStorage.removeItem("token");
@@ -47,7 +64,6 @@ const Dashboard = () => {
   }, [user, isNicknameUpdated]);
 
   if (!user) return <p>Cargando...</p>;
-
 
   return (
     <div className={styles.Overlay}>
@@ -69,7 +85,12 @@ const Dashboard = () => {
         <>
           <div className={styles.Container}>
             <Status user={user} selectedGame={selectedGame} setSelectedGame={setSelectedGame} onLogout={handleLogoutClick} />
-            <Content selectedGame={selectedGame} setSelectedGame={setSelectedGame} />
+            <Content
+              user={user}
+              setUser={setUser}
+              selectedGame={selectedGame}
+              setSelectedGame={setSelectedGame}
+            />
           </div>
 
         </>

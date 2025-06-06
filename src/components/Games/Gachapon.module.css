@@ -1,8 +1,173 @@
-/* .Content { */
-/*   display: flex; */
-/*   flex-direction: column; */
-/*   align-items: center; */
-/*   justify-content: center; */
-/*   min-height: 100vh; */
-/*   padding: 0; */
-/* } */
+.Content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* min-height:20vh; */
+  padding: 0;
+}
+
+/*Area del Gachapon*/
+.areaGachapon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60vw;
+  min-height: 80vh;
+  /*calc(100vh - 10vh);  100vh menos altura de la barra */
+  /* Para la barra superior */
+  overflow: hidden;
+  position: relative;
+}
+
+.gachaponContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  z-index: 400;
+}
+
+.gachapon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  position: relative;
+}
+
+.gachaMachine {
+  height: 75vh;
+  max-height: 80vh;
+  filter: drop-shadow(0 0 10px rgb(15, 34, 8, 0.75));
+  margin-bottom: -50px;
+  margin-top: -50px;
+  margin-left: -250px;
+  margin-right: -250px;
+}
+
+.gachapon button {
+  margin-bottom: 4vh;
+  margin-top: 2vh;
+  padding: 2vh 4vw;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2vh;
+  color: #000000;
+  background-color: #f0c040;
+  text-shadow: 3px 3px #b18200a9;
+  box-shadow: 0 0 10px rgba(63, 136, 37, 0.5);
+  border: none;
+  border-radius: 0.5vh;
+  cursor: pointer;
+  position: relative;
+  width: auto;
+  z-index: 500;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Hover cuando el botón está habilitado */
+.gachaponButton:not(:disabled):hover {
+  background-color: #e0b030;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transform: translateY(2px);
+}
+
+/* Estilo cuando el botón está deshabilitado */
+.gachaponButton:disabled {
+  background-color: #d3d3d3;
+  text-shadow: 3px 3px #9e9e9ec2;
+  color: #555;
+  cursor: not-allowed;
+}
+
+/* Hover cuando el botón está deshabilitado */
+.gachaponButton:disabled:hover {
+  background-color: #ff6b6b;
+  text-shadow: 3px 3px #c43b3bbd;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+  transform: translateY(2px);
+}
+
+.gachaponButton:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  background-color: #d0a030;
+}
+
+/* Nubes */
+.nubes {
+  height: 40vh;
+  position: absolute;
+  z-index: 200;
+  filter: drop-shadow(0 0 5px rgb(15, 34, 8, 0.5));
+}
+
+.nubesIzquierda {
+  left: 0vw;
+  top: 15%;
+}
+
+.nubesDerecha {
+  right: 0vw;
+  top: 15%;
+  transform: scaleX(-1);
+}
+
+/* Ajustes para pantallas */
+@media (max-width: 1400px) {
+  .nubesIzquierda {
+    left: 5vw;
+    top: 15%;
+    scale: 0.8;
+    transform: translateX(-16%);
+  }
+
+  .nubesDerecha {
+    right: 5vw;
+    top: 15%;
+    scale: 0.8;
+    transform: translateX(15%) scaleX(-1);
+  }
+}
+
+/* Ajustes para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .areaGachapon {
+    width: 90vw;
+  }
+
+  .gachaMachine {
+    height: 60vh;
+  }
+
+  .gachaponButton {
+    padding: 1.5vh 5vw;
+    font-size: 1.8vh;
+  }
+
+  .nubes {
+    height: 30vh;
+    opacity: 0.6;
+    top: 40%;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .nubesIzquierda {
+    scale: 0.8;
+    transform: translateY(-50%) translateX(-50%);
+  }
+
+  .nubesDerecha {
+    scale: 0.8;
+    transform: translateY(-50%) translateX(50%) scaleX(-1);
+  }
+}
+
+/* Ajustes para pantallas muy grandes */
+@media (min-width: 1200px) {
+  .gachaMachine {
+    height: 80vh;
+  }
+}

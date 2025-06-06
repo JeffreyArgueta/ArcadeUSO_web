@@ -5,8 +5,6 @@ import styles from "./StatusBarSecond.module.css";
 import leaderboardIcon from "@/assets/leaderboard.png";
 
 const StatusBarSecond = ({ selectedGame, setSelectedGame }) => {
-  console.log("Props en StatusBarSecond:", { selectedGame, setSelectedGame });
-
   return (
     <div className={styles.statusBarSecond}>
       <div>

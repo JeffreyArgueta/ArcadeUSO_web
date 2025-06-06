@@ -16,6 +16,20 @@ export const getUserByUsername = async (userUsername) => {
   }
 };
 
+export const getUserById = async (idUser) => {
+  try {
+    const response = await axios.get(`${API_URL}/user/${idUser}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`, // Autenticación si es necesaria
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("❌ Error obteniendo usuario por ID:", error.response?.data || error.message);
+    throw error;
+  }
+};
+
 export const getUserByEmail = async (userEmail) => {
   try {
     const response = await axios.get(`${API_URL}/user/email/${userEmail}`);

@@ -28,7 +28,7 @@ const sounds = {
     { src: ["/sounds/fallagachapon.mp3"], volume: 0.6, delay: 2900, endtime: 3 },
     { src: ["/sounds/explosion-2.mp3"], volume: 0.9, delay: 5500 },
     { src: ["/sounds/explosion-4.wav"], volume: 0.4, delay: 5700 },
-    { src: ["/sounds/meteorito-2.wav"], volume: 0.4, delay: 6000 },
+    { src: ["/sounds/meteorito-2.mp3"], volume: 0.4, delay: 6000 },
     { src: ["/sounds/explosion-3.mp3"], volume: 0.7, delay: 9500 },
     { src: ["/sounds/legendario-texto.mp3"], volume: 0.9, delay: 10000, loop: true },
   ),

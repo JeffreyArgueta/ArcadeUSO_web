@@ -5,7 +5,7 @@ import { useState } from "react";
 import TikTakToeInstructions from "@/components/PixelModal/instrucciones-tiktaktoe";
 import styles from "./Gachapon.module.css";
 
-const TikTakToe = () => {
+const TikTakToe = ({ user, setUser }) => {
   const [selectedGame, setSelectedGame] = useState(null);
   const [showInstructions, setShowInstructions] = useState(true);
 

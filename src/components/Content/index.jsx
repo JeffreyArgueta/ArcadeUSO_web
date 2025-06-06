@@ -11,7 +11,7 @@ import imgGachapon from "@/assets/Gachapon/Inserte Moneda.gif";
 import imgMinesweeper from "@/assets/Buscaminas/Bomba.gif";
 
 
-const Content = ({ selectedGame, setSelectedGame }) => {
+const Content = ({ user, setUser, selectedGame, setSelectedGame }) => {
   const { sounds } = useSound();
   const { playGame } = sounds;
 
@@ -43,9 +43,9 @@ const Content = ({ selectedGame, setSelectedGame }) => {
         </>
       ) : (
         <div className="gameContainer">
-          {selectedGame === "minesweeper" && <Minesweeper />}
-          {selectedGame === "tiktaktoe" && <TikTakToe />}
-          {selectedGame === "gachapon" && <Gachapon />}
+          {selectedGame === "minesweeper" && <Minesweeper user={user} setUser={setUser}/>}
+          {selectedGame === "tiktaktoe" && <TikTakToe user={user} setUser={setUser}/>}
+          {selectedGame === "gachapon" && <Gachapon user={user} setUser={setUser}/>}
         </div>
       )}
     </div>
