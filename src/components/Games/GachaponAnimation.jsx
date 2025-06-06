@@ -27,21 +27,22 @@ const GachaponAnimation = ({ onUpdateCoins, onUpdateScore, onAnimationChange, on
   }, [animationState, currentReward, onAnimationChange]);
 
   const play = useCallback((currentCoins) => {
-    if (currentCoins <= 0 || isPlaying || rewards.length === 0) {
+    if (currentCoins <= 0 || isPlaying) {
       return false;
     }
 
     setIsPlaying(true);
-    setAnimationState("inserting");
-    onUpdateCoins(prev => prev - 1); // Restar una moneda al jugador
+    setAnimationState('inserting');
+    onUpdateCoins(prev => prev - 1); // Restar moneda inmediatamente
+    //Sonido de insertar moneda
 
     setTimeout(() => {
-      setAnimationState("showing");
+      setAnimationState('showing');
       const reward = determineReward();
-      setCurrentReward(reward.rarity);
+      setCurrentReward(reward);
 
       setTimeout(() => {
-        setAnimationState("idle");
+        setAnimationState('idle');
         setIsPlaying(false);
         if (onFinishAnimation) {
           onFinishAnimation(reward);
@@ -50,7 +51,7 @@ const GachaponAnimation = ({ onUpdateCoins, onUpdateScore, onAnimationChange, on
     }, 900);
 
     return true;
-  }, [isPlaying, rewards, onUpdateCoins, onFinishAnimation]);
+  }, [isPlaying, onUpdateCoins, onFinishAnimation]); //Dependencias
 
   const determineReward = useCallback(() => {
     const rand = Math.random() * 100;
