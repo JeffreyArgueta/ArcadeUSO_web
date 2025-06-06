@@ -137,7 +137,11 @@ const Gachapon = ({ user, setUser }) => {
         </div>
 
         {showReward && recompensaActual && (
-          <RecompensaModal rarity={recompensaActual.rarity} points={recompensaActual.daro_points_value} onClose={handleCloseModal} />
+          <RecompensaModal
+            rarity={recompensaActual.rarity}
+            points={recompensaActual.daro_points_value}
+            onClose={handleCloseModal}
+          />
         )}
       </div >
     </>
