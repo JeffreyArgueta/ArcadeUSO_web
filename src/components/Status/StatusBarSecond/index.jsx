@@ -4,11 +4,11 @@ import StatusItem from "../StatusItem";
 import VolumeControl from "@/components/VolumeControl";
 import styles from "./StatusBarSecond.module.css";
 import leaderboardIcon from "@/assets/leaderboard.png";
+import exitIcon from "@/assets/Exit.png";
 
 const StatusBarSecond = ({ selectedGame, setSelectedGame, setShowLeaderboard }) => {
   const { sounds } = useSound();
   const { button } = sounds;
-
 
   const handleClickLeaderboard = () => {
     button.play();
@@ -23,12 +23,18 @@ const StatusBarSecond = ({ selectedGame, setSelectedGame, setShowLeaderboard }) 
         </StatusItem>
       </div>
       <div className={styles.options}>
-        <button className={styles.return}
+        <StatusItem
+          icon={exitIcon}
           onClick={() => setSelectedGame(null)}
           hidden={selectedGame === null}
-          type="button">Regresar
-        </button>
-        <StatusItem icon={leaderboardIcon} onClick={handleClickLeaderboard} alt="Ver Puntuaciones" />
+          type="button"
+          alt="Volver a los juegos"
+        />
+        <StatusItem
+          icon={leaderboardIcon}
+          onClick={handleClickLeaderboard}
+          alt="Ver Puntuaciones."
+        />
       </div>
     </div>
   );
