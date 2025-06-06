@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { getUserById } from "@/services/api"
 import LogoutModal from "@/components/LogoutModal";
+import LeaderboardModal from "@/components/LeaderboardModal";
 import NicknameForm from "@/components/Nickname";
 import Status from "@/components/Status";
-import Content from "../components/Content";
+import Content from "@/components/Content";
 import styles from "./Dashboard.module.css"
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [showLeaderboard, setShowLeaderboard] = useState(false);
+  const [selectedGame, setSelectedGame] = useState(null);
   const [isNicknameUpdated, setIsNicknameUpdated] = useState(false);
   const [container, setContainer] = useState("nickname");
 
@@ -22,6 +26,8 @@ const Dashboard = () => {
     navigate("/");
   };
 
+  const handleClose = () => setShowLeaderboard(false);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -31,7 +37,23 @@ const Dashboard = () => {
 
     try {
       const decoded = jwtDecode(token);
-      setUser(decoded);
+
+      // 🔥 Nueva llamada a la API para obtener datos reales del usuario
+      const fetchUser = async () => {
+        try {
+          const updatedUser = await getUserById(decoded.id_user);
+          if (updatedUser) {
+            setUser(updatedUser); // 🔥 Ahora usamos la versión actualizada del usuario
+          }
+        } catch (error) {
+          console.error("❌ Error obteniendo datos del usuario:", error);
+          localStorage.removeItem("token");
+          navigate("/");
+        }
+      };
+
+      fetchUser();
+
     } catch (error) {
       console.error("❌ Token inválido:", error);
       localStorage.removeItem("token");
@@ -49,29 +71,48 @@ const Dashboard = () => {
 
   return (
     <div className={styles.Overlay}>
-      
-        {showConfirm && (
-          <div className={styles.logoutOverlay}>
-            <LogoutModal onConfirm={handleConfirmLogout} onCancel={handleCancel} />
-          </div>
-        )}
-        {container === "nickname" ? (
-          <NicknameForm
-            user={user}
-            setUser={setUser}
-            isNicknameUpdated={isNicknameUpdated}
-            setIsNicknameUpdated={setIsNicknameUpdated}
-            switchToDashboard={() => setContainer("dashboard")}
-          />
-        ) : (
-          <>
+
+      {showConfirm && (
+        <div className={styles.logoutOverlay}>
+          <LogoutModal onConfirm={handleConfirmLogout} onCancel={handleCancel} />
+        </div>
+      )}
+
+      {showLeaderboard && (
+        <div className={styles.logoutOverlay}>
+          <LeaderboardModal onClose={handleClose} />
+        </div>
+      )}
+
+      {container === "nickname" ? (
+        <NicknameForm
+          user={user}
+          setUser={setUser}
+          isNicknameUpdated={isNicknameUpdated}
+          setIsNicknameUpdated={setIsNicknameUpdated}
+          switchToDashboard={() => setContainer("dashboard")}
+        />
+      ) : (
+        <>
           <div className={styles.Container}>
-            <Status user={user} onLogout={handleLogoutClick} />
-            <Content />
+            <Status
+                user={user}
+                selectedGame={selectedGame}
+                setSelectedGame={setSelectedGame}
+                showLeaderboard={showLeaderboard}
+                onLogout={handleLogoutClick}
+            />
+            <Content
+              user={user}
+              setUser={setUser}
+              selectedGame={selectedGame}
+              setSelectedGame={setSelectedGame}
+            />
           </div>
-            
-          </>
-        )}
+
+        </>
+      )}
+
     </div>
     //   <p>Tu correo: {user.email}</p>
     //   <p>Tu ID: {user.id_user}</p>

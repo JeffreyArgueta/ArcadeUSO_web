@@ -1,10 +1,20 @@
 import PropTypes from "prop-types";
+import { useSound } from "@/context/soundContext";
 import StatusItem from "../StatusItem";
 import VolumeControl from "@/components/VolumeControl";
 import styles from "./StatusBarSecond.module.css";
 import leaderboardIcon from "@/assets/leaderboard.png";
 
-const StatusBarSecond = () => {
+const StatusBarSecond = ({ selectedGame, setSelectedGame, showLeaderboard }) => {
+  const { sounds } = useSound();
+  const { button } = sounds;
+
+
+  const handleClickLeaderboard = () => {
+    button.play();
+    // showLeaderboard();
+  }
+
   return (
     <div className={styles.statusBarSecond}>
       <div>
@@ -12,8 +22,13 @@ const StatusBarSecond = () => {
           <VolumeControl className={styles.statusIcon} />
         </StatusItem>
       </div>
-      <div>
-        <StatusItem icon={leaderboardIcon} alt="Ver Puntuaciones" />
+      <div className={styles.options}>
+        <button className={styles.return}
+          onClick={() => setSelectedGame(null)}
+          hidden={selectedGame === null}
+          type="button">Regresar
+        </button>
+        <StatusItem icon={leaderboardIcon} onClick={handleClickLeaderboard} alt="Ver Puntuaciones" />
       </div>
     </div>
   );

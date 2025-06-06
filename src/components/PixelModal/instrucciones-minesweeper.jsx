@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from "react";
 import PixelFrame from "./pixel-frame.jsx";
 import { useSound } from "@/context/soundContext";
-import "./instrucciones-gachapon.css";
+import "./instrucciones.css";
 
 const InstruccionesModal = React.memo(({ onClose }) => {
   const { sounds } = useSound();
@@ -27,7 +27,7 @@ const InstruccionesModal = React.memo(({ onClose }) => {
       <PixelFrame>
         <div className="instrucciones-contenido">
           <h1>¡Bienvenido a Buscaminas!</h1>
-          <h2>¿Como jugar?</h2>
+          <h2>¿Cómo jugar?</h2>
           <div className="Alineado-Izquierda">
             <p>1. Haz clic en una celda para descubrirla.</p>
             <p>2. Si encuentras una bomba 💣, pierdes la partida.</p>

@@ -13,3 +13,12 @@
 .statusIcon {
   width: clamp(2.5rem, 5vw, 5rem);
 }
+
+.options {
+  display: flex;
+}
+
+.return {
+  cursor: pointer;
+
+}

@@ -5,8 +5,10 @@ const SoundContext = createContext(null);
 
 const sounds = {
   click: new Howl({ src: ["/sounds/click.mp3"], volume: 0.5 }),
+  logout: new Howl({ src: ["/sounds/logout.mp3"], volume: 1 }),
   background: new Howl({ src: ["/sounds/8-bit-loop-189494.mp3"], volume: 0.3, loop: true }),
   button: new Howl({ src: ["/sounds/button.mp3"], volume: 1 }),
+  playGame: new Howl({ src: ["/sounds/selectionGame.mp3"], volume: 1 }),
   coin: new Howl({ src: ["/sounds/coin-insert.wav"], volume: 0.5, delay: 650 }),
   volumeAlert: new Howl({ src: ["/sounds/volume-alert.mp3"], volume: 1 }),
   comun: new Howl(
@@ -26,7 +28,7 @@ const sounds = {
     { src: ["/sounds/fallagachapon.mp3"], volume: 0.6, delay: 2900, endtime: 3 },
     { src: ["/sounds/explosion-2.mp3"], volume: 0.9, delay: 5500 },
     { src: ["/sounds/explosion-4.wav"], volume: 0.4, delay: 5700 },
-    { src: ["/sounds/meteorito-2.wav"], volume: 0.4, delay: 6000 },
+    { src: ["/sounds/meteorito-2.mp3"], volume: 0.4, delay: 6000 },
     { src: ["/sounds/explosion-3.mp3"], volume: 0.7, delay: 9500 },
     { src: ["/sounds/legendario-texto.mp3"], volume: 0.9, delay: 10000, loop: true },
   ),

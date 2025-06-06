@@ -28,7 +28,7 @@ const StatusBar = ({ user, onLogout }) => {
       <div className={styles.statusPoints}>
         <StatusItem icon={daroIcon} text={user.daro_points} className={styles.daroPoints} />
         <StatusItem icon={usoIcon} text={user.uso_coins} className={styles.usoCoins} />
-        <StatusItem icon={shutdownIcon} onClick={handleClickLogout} />
+        <StatusItem icon={shutdownIcon} onClick={handleClickLogout} alt="Cerrar Sesión" />
       </div>
     </div>
   );

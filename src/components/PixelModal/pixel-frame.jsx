@@ -1,6 +1,3 @@
-import "./pixel-frame.css";
-
-// Importación de imágenes
 import esquinaAI from "@/assets/corners/upper_left.png";
 import esquinaAD from "@/assets/corners/upper_right.png";
 import esquinaBI from "@/assets/corners/bottom_left.png";
@@ -12,6 +9,8 @@ import bordeI from "@/assets/borders/left.png";
 import bordeD from "@/assets/borders/right.png";
 
 import fondo from "@/assets/fill.png";
+
+import "./pixel-frame.css";
 
 const PixelFrame = ({ children }) => {
   return (
