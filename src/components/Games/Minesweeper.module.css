@@ -1,10 +1,17 @@
-.Content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 65vh;
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+html, body {
+  font-family: "Press Start 2P", system-ui;
+  background-color: #1d3f11;
+  margin: 0;
   padding: 0;
+  overflow: hidden;
+}
+
+#root {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
 }
 
 /* Contenedor principal que centra el juego */
@@ -13,36 +20,36 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 100%;        /* Ocupa todo el contenedor, pero la cuadrícula será fija */
   height: 100%;
   position: relative;
-  z-index: 300;
+  z-index: 300;       /* Por encima de otros elementos, como las nubes */
 }
 
 /* Tablero (grid de 5 x 5) en dimensiones fijas */
 .board {
   display: grid;
   margin-top: 10px;
-  width: 320px;
-  /* Tamaño fijo */
-  height: 320px;
-  /* Tamaño fijo */
+  width: 320px;       /* Tamaño fijo */
+  height: 320px;      /* Tamaño fijo */
   grid-template-columns: repeat(5, 1fr);
   gap: 2px;
   justify-content: center;
   align-items: center;
 }
 
+
 .row {
   display: contents;
 }
 
+
 .cell {
-  width: 64px;
+  width: 64px;        
   height: 64px;
   border: none;
   outline: none;
-  background: url('@/assets/buscaminas/box.png') center/cover no-repeat;
+  background: url('../../assets/box.png') center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -59,14 +66,15 @@
   display: block;
 }
 
+/* Botón de reiniciar */
 .resetButton {
   margin-top: 20px;
   padding: 10px 20px;
   font-size: 20px;
   color: #000;
   background-color: #f0c040;
-  text-shadow: 3px 3px rgba(177, 130, 0, 0.66);
-  box-shadow: 0 0 10px rgba(63, 136, 37, 0.5);
+  text-shadow: 3px 3px rgba(177,130,0,0.66);
+  box-shadow: 0 0 10px rgba(63,136,37,0.5);
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -80,7 +88,7 @@
 
 .resetButton:active {
   transform: translateY(4px);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
   background-color: #d0a030;
 }
 
@@ -91,27 +99,40 @@
   color: #888;
 }
 
+/* Mensaje de juego terminado */
 .gameOver {
   color: red;
   font-weight: bold;
 }
 
+
 .nubes {
   position: absolute;
-  height: 200px;
+<<<<<<< Updated upstream
+  height: 200px;       /* Valor fijo en px */
+=======
+  height: 250px;
   /* Valor fijo en px */
+>>>>>>> Stashed changes
   width: auto;
   z-index: 200;
-  filter: drop-shadow(0 0 5px rgba(15, 34, 8, 0.5));
+  filter: drop-shadow(0 0 5px rgba(15,34,8,0.5));
 }
 
 .nubes-izquierda {
+<<<<<<< Updated upstream
   top: 150px;
-  left: -10px;
+  left: 50px;
+=======
+  top: 100px;
+  left: -250px;
+>>>>>>> Stashed changes
 }
 
 .nubes-derecha {
-  top: 150px;
-  right: 50px;
+  top: 100px;
+  right: -250px;
   transform: scaleX(-1);
 }
+
+
