@@ -5,14 +5,14 @@ import VolumeControl from "@/components/VolumeControl";
 import styles from "./StatusBarSecond.module.css";
 import leaderboardIcon from "@/assets/leaderboard.png";
 
-const StatusBarSecond = ({ selectedGame, setSelectedGame, showLeaderboard }) => {
+const StatusBarSecond = ({ selectedGame, setSelectedGame, setShowLeaderboard }) => {
   const { sounds } = useSound();
   const { button } = sounds;
 
 
   const handleClickLeaderboard = () => {
     button.play();
-    // showLeaderboard();
+    setShowLeaderboard(true);
   }
 
   return (

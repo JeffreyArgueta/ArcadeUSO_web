@@ -99,7 +99,7 @@ const Dashboard = () => {
                 user={user}
                 selectedGame={selectedGame}
                 setSelectedGame={setSelectedGame}
-                showLeaderboard={showLeaderboard}
+                setShowLeaderboard={setShowLeaderboard}
                 onLogout={handleLogoutClick}
             />
             <Content

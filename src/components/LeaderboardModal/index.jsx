@@ -1,34 +1,60 @@
 import PropTypes from "prop-types";
-import { useCallback } from "react";
-import { useSound } from "@/context/soundContext";
+import { useEffect, useState } from "react";
+import { getTopLeaderboard } from "@/services/api";
 import CloseButton from "@/components/CloseButton";
+import points from "@/assets/daro_points.png";
 import styles from "./LeaderboardModal.module.css";
 
-const LeaderboardModal = ({ onConfirm, onCancel }) => {
-  const { sounds } = useSound();
-  const { logout } = sounds;
+const LeaderboardModal = ({ onClose }) => {
+  const [leaderboard, setLeaderboard] = useState([]);
 
-  const handleConfirm = useCallback(() => {
-    logout.play();
-    setTimeout(onConfirm, 250);
-  }, [onConfirm]);
+  useEffect(() => {
+    const fetchLeaderboard = async () => {
+      try {
+        const data = await getTopLeaderboard();
+        setLeaderboard(data);
+      } catch (error) {
+        console.error("❌ Error cargando leaderboard:", error);
+      }
+    };
+
+    fetchLeaderboard();
+  }, []);
 
   return (
     <div className={styles.leaderboardModal}>
-      <CloseButton onClose={onClose} disabled={disabled} />
-      {/* <h1>¿Estás seguro?</h1> */}
-      {/* <p>Perderás cualquier progreso no guardado. ¿Deseas continuar?</p> */}
-      {/* <div className={styles.modalActions}> */}
-      {/*   <button className={styles.cancelButton} onClick={onCancel}>Cancelar</button> */}
-      {/*   <button className={styles.confirmButton} onClick={handleConfirm}>Cerrar sesión</button> */}
-      {/* </div> */}
+      <CloseButton onClose={onClose} />
+      <h2 className={styles.title}>TOP 10</h2>
+
+      <div className={styles.tableContainer}>
+        <table className={styles.leaderboardTable}>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Jugador</th>
+              <th>
+                <img src={points} alt="DaroPoints" className={styles.icon} />
+                Points
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {leaderboard.map((user, index) => (
+              <tr key={user.id_user} className={index < 3 ? styles.top3 : styles.regular}>
+                <td>{index + 1}</td>
+                <td>{user.username}</td>
+                <td>{user.daro_points}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
 
 LeaderboardModal.propTypes = {
-  onConfirm: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default LeaderboardModal;

@@ -8,7 +8,7 @@
   border-radius: 0.8rem;
   text-align: center;
   flex-direction: column;
-  width: min(90vw, 500px);
+  width: min(100vw, 700px);
   color: white;
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
   overflow: hidden;
@@ -16,89 +16,151 @@
   transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
-.logoutModal h1 {
-  font-size: clamp(0.6rem, 4vw, 1.4rem);
+.title {
+  color: #ffcc00;
+  filter: drop-shadow(0.3rem 0.3rem rgba(0, 0, 0, 1));
+  font-size: 2.5vw;
   text-align: center;
-  color: #ffd000;
-  text-shadow: 3px 3px rgba(0, 0, 0, 1);
+  animation: pulseGlow 1.5s infinite alternate;
 }
 
-.logoutModal p {
-  font-size: clamp(0.2rem, 3vw, 0.9rem);
-  text-align: center;
-  text-shadow: 3px 3px rgba(0, 0, 0, 1);
+.icon {
+  width: 32px;
+  height: auto;
+  margin-right: 8px;
+  vertical-align: middle;
 }
 
-.modalActions {
+.tableContainer {
   display: flex;
-  justify-content: space-between;
-  width: 100%;
-  gap: 2rem;
+  justify-content: center;
+  margin-top: 10px;
 }
 
-.cancelButton, .confirmButton {
-  width: 50%;
-  font-size: clamp(0.5rem, 3vw, 1rem);
-  text-shadow: 2px 2px rgba(0, 0, 0, 1);
-  padding: 0.5rem;
-  border: none;
-  cursor: pointer;
-  border-radius: 0.5rem;
+.leaderboardTable {
+  width: 90%;
+  border-collapse: collapse;
+  background-color: #3A7F20;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 0.8rem;
+  overflow: hidden;
+  text-shadow: 3px 3px #b18200a9;
 }
 
-.cancelButton {
-  background: #7f8c8d;
-  color: white;
+.leaderboardTable td {
+  padding: 1rem;
+  text-align: center;
 }
 
-.confirmButton {
-  background: #e74c3c;
-  color: white;
+.leaderboardTable th {
+  background: #5A3825;
+  color: #FFCC00;
+  text-transform: uppercase;
+  padding: 1.5rem;
 }
 
-.cancelButton:hover {
-  background: #5e6b6e;
+.leaderboardTable tr:nth-child(even) {
+  background: #C2A468;
 }
 
-.confirmButton:hover {
-  background: #c0392b;
+.leaderboardTable tr:nth-child(odd) {
+  background: #E7CA8E;
 }
 
-.cancelButton:active {
-  background: #4a5558;
+.leaderboardTable tr:hover {
+  transform: scale(1.05);
+  transition: 0.3s ease-in-out;
 }
 
-.confirmButton:active {
-  background: #a93226;
+.top3 {
+  text-shadow: 1.9px 1.9px rgba(0, 0, 0, 0.5);
 }
 
-.cancelButton:hover, .confirmButton:hover {
-  transform: translateY(-2px);
+.top3:nth-child(1) {
+  background: #ffcc00 !important;
+  font-size: 1.25rem;
+  color: #274A78;
 }
 
-.cancelButton:active, .confirmButton:active {
-  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.4);
-  transform: translateY(2px);
+.top3:nth-child(2) {
+  background: #8C8070 !important;
+  font-size: 1.15rem;
+  color: #FFD580;
 }
 
-.cancelButton:focus, .confirmButton:focus {
-  border: 1px solid white;
-  outline: none;
+.top3:nth-child(3) {
+  background: #A65D3B !important;
+  font-size: 1.05rem;
+  color: #F2E5D3;
 }
 
-.cancelButton:disabled, .confirmButton:disabled {
-  background-color: #bdbdbd;
-  cursor: not-allowed;
+@keyframes pulseGlow {
+  0% {
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, 1),
+      0 0 20px rgba(255, 204, 0, 0.5);
+    filter: brightness(1);
+  }
+
+  50% {
+    text-shadow: 5px 5px 2.5px rgba(0, 0, 0, 1),
+      0 0 30px rgba(255, 204, 0, 1);
+    filter: brightness(1.001);
+  }
+
+  100% {
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, 1),
+      0 0 35px rgba(255, 204, 0, 1.2);
+    filter: brightness(1);
+  }
 }
 
-@keyframes fadeIn {
-  0% { opacity: 0; }
-  50% { opacity: 0.5; }
-  100% { opacity: 1; }
+/* ✅ Ajustar el contenedor para móviles */
+@media (max-width: 600px) {
+  .leaderboardModal {
+    width: 90%;
+    padding: 1rem;
+    font-size: 3vw;
+  }
+
+  .top3:nth-child(1) {
+    font-size: 2.5vw;
+  }
+
+  .top3:nth-child(2) {
+    font-size: 2.4vw;
+  }
+
+  .top3:nth-child(3) {
+    font-size: 2.3vw;
+  }
+
+  .title {
+    font-size: 5vw;
+  }
+
+  .leaderboardTable {
+    width: 100%;
+    font-size: 2vw;
+  }
 }
 
-@media (max-width: 480px) {
-  .cancelButton, .confirmButton {
-    width: 50%;
+/* ✅ Scroll horizontal en móviles para la tabla */
+@media (max-width: 450px) {
+  .tableContainer {
+    overflow-x: auto;
+    display: block;
+  }
+
+  .leaderboardTable th,
+  .leaderboardTable td {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .leaderboardModal {
+    max-width: 50vw;
+    /* Para evitar que se vea demasiado grande en pantallas grandes */
   }
 }
