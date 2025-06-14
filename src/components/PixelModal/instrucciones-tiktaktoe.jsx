@@ -32,15 +32,13 @@ const InstruccionesModal = React.memo(({ onClose }) => {
             <p>1. Selecciona la dificultad:</p>
 
             <ul>
-              <li><span className="facil">* Fácil: +1 UsoCoin</span></li>
-              <li><span className="medio">* Medio: +2 UsoCoins</span></li>
-              <li><span className="dificil">* Difícil: +3 UsoCoins</span></li>
+              <li><span className="facil">* Fácil</span></li>
+              <li><span className="medio">* Medio</span></li>
+              <li><span className="dificil">* Difícil</span></li>
             </ul>
 
             <p>2. Se te asignará un símbolo aleatoriamente ❌ o ⭕.</p>
             <p>3. Si ganas o empatas puedes usar el botón "Siguiente ronda".</p>
-            <p>4. ¡Si ganas las 5 rondas reclama tus UsoCoins!</p>
-            <p>5. ¡Intenta conseguir la mayor cantidad de Usocoins posibles!</p>
           </div>
           <button type="button" onClick={handleClose}>¡Entendido!</button>
         </div>
